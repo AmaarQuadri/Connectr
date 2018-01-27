@@ -30,7 +30,7 @@
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="allFriends"/>
+            android:id="@+id/all_friends"/>
 
         <Space
             android:layout_width="wrap_content"
