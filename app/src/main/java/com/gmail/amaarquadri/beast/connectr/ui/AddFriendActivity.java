@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
@@ -31,6 +32,14 @@ public class AddFriendActivity extends Activity {
     public void addFriend(View view) {
         ServerResponse response = ServerUtils.sendToServer(ServerRequest.createAddFriendServerRequest(user.getUsername(),
                 usernameEditText.getText().toString()));
+        if (response.getType() == ServerResponse.Type.ADD_FRIEND_SUCCESS) {
+            user.getFriends().add(response.getNewFriend());
+            usernameEditText.getText().clear();
+            Toast.makeText(this, "Friend added!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "That user doesn't exist.", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
