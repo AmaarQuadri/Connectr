@@ -13,12 +13,12 @@ public class LocationData implements Serializable {
 
     private final double latitude;
     private final double longitude;
-    private final long time;
+    private final long lastUpdateUnixTime;
 
     public LocationData(Location location) {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
-        time = location.getTime();
+        lastUpdateUnixTime = location.getTime();
     }
 
     public Location toLocation() {
@@ -26,7 +26,7 @@ public class LocationData implements Serializable {
         Location result = new Location("Server");
         result.setLatitude(latitude);
         result.setLongitude(longitude);
-        result.setTime(time);
+        result.setTime(lastUpdateUnixTime);
         return result;
     }
 
@@ -38,7 +38,7 @@ public class LocationData implements Serializable {
         return longitude;
     }
 
-    public double getTime() {
-        return time;
+    public double getLastUpdateUnixTime() {
+        return lastUpdateUnixTime;
     }
 }

@@ -5,7 +5,7 @@ package com.gmail.amaarquadri.beast.connectr;
  */
 
 public class ServerUtils {
-    public static boolean attemptLogin(String username, String password) {
-        return true;
+    public static ServerResponse sendToServer(ServerRequest serverRequest) {
+        return null;
     }
 }
