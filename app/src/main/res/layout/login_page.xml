@@ -20,13 +20,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Password:"
-        android:textSize="32sp" 
-        android:id="@+id/password"/>
+        android:textSize="32sp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:inputType="text"
+        android:id="@+id/password" />
 
     <Button
         android:layout_width="match_parent"
