@@ -19,7 +19,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:id="@+id/email"/>
     </LinearLayout>
 
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:id="@+id/username"/>
+            android:id="@+id/create_username"/>
     </LinearLayout>
 
     <LinearLayout
@@ -56,8 +56,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:id="@+id/password" />
+            android:inputType="textPassword"
+            android:id="@+id/create_password" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,16 +74,16 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:id="@+id/passwordRepeat" />
+            android:inputType="textPassword"
+            android:id="@+id/create_password_repeat" />
     </LinearLayout>
 
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="login"
-        android:text="Login"
+        android:onClick="create"
+        android:text="Create Account"
         android:textSize="32sp" />
 
 </LinearLayout>
