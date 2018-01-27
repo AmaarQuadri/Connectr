@@ -27,6 +27,7 @@ public class FriendsActivity extends Activity {
 
         ArrayList<User> friends = user.getFriends();
         friends.sort(Comparator.comparing(User::getUsername));
+        ArrayList<User> friendsWithAccess();
 
         for (User friend : user.getFriends()) {
             LinearLayout friendRow = new LinearLayout(this);
@@ -40,7 +41,7 @@ public class FriendsActivity extends Activity {
             friendRow.addView(friendNameTextView);
 
             ToggleButton button = new ToggleButton(this);
-            //button.setSelected(user.getLocationPermissions().stream().map(locationPermission -> locationPermission.ge));
+
             button.setOnClickListener(view -> {
 
             });
