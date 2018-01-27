@@ -28,5 +28,5 @@
         android:onClick="addFriend"
         android:text="Add Friend!"
         android:textSize="32sp" />
-    
+
 </LinearLayout>
