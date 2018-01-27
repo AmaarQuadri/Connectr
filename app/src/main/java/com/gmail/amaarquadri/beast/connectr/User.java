@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Created by amaar on 2018-01-27.
@@ -19,16 +20,16 @@ public class User implements Serializable {
     private final String username;
     private final String password;
     private final LocationData lastLocationData;
-    private final HashMap<User, Boolean> friendsMap;
+    private final ArrayList<Friend> friends;
 
     public User(int index, int id, String username, String password, LocationData lastLocation,
-                HashMap<User, Boolean> friendsMap) {
+                ArrayList<Friend> friends) {
         this.index = index;
         this.id = id;
         this.username = username;
         this.password = password;
         this.lastLocationData = lastLocation;
-        this.friendsMap = friendsMap;
+        this.friends = friends;
     }
 
     public int getIndex() {
@@ -51,11 +52,7 @@ public class User implements Serializable {
         return lastLocationData;
     }
 
-    public HashMap<User, Boolean> getFriendsMap() {
-        return friendsMap;
-    }
-
-    public Set<User> getFriends() {
-        return friendsMap.keySet();
+    public ArrayList<Friend> getFriends() {
+        return friends;
     }
 }

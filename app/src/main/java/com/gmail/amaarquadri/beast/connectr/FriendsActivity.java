@@ -11,6 +11,8 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by amandamorin on 2018-01-27.
@@ -25,7 +27,7 @@ public class FriendsActivity extends Activity {
         User user = (User) getIntent().getSerializableExtra("user");
         friendsLinearLayout = findViewById(R.id.friends_list);
 
-        ArrayList<User> friends = user.getFriends();
+        TreeMap<User, Boolean> friends = user.getFriendsMap();
         friends.sort(Comparator.comparing(User::getUsername));
         ArrayList<User> friendsWithAccess();
 
