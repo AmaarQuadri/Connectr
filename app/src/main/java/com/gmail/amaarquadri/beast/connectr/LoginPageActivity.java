@@ -1,6 +1,7 @@
 package com.gmail.amaarquadri.beast.connectr;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -47,5 +48,8 @@ public class LoginPageActivity extends Activity {
         }
 
         User user = response.getUser();
+        Intent intent = new Intent(this, FriendsActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 }
