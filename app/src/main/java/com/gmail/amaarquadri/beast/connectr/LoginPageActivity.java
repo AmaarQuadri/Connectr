@@ -25,18 +25,27 @@ public class LoginPageActivity extends Activity {
     public void login(View view) {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Username and Password cannot be empty.",
                     Toast.LENGTH_SHORT).show();
+            return;
         }
         else if (username.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty.", Toast.LENGTH_SHORT).show();
+            return;
         }
         else if (password.isEmpty()) {
             Toast.makeText(this, "Password cannot be empty.", Toast.LENGTH_SHORT).show();
+            return;
         }
-        else {
-            new ServerRequest(username, password);
+
+        ServerResponse response = ServerUtils.sendToServer(new ServerRequest(username, password));
+        if (response.getType() == ServerResponse.Type.LOGIN_FAILED) {
+            Toast.makeText(this, "Login failed. Please try again or make a new account.",
+                    Toast.LENGTH_LONG).show();
         }
+
+        User user = response.getUser();
     }
 }
