@@ -4,6 +4,9 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Created by amaar on 2018-01-27.
@@ -17,18 +20,16 @@ public class User implements Serializable {
     private final String username;
     private final String password;
     private final LocationData lastLocationData;
-    private final ArrayList<User> friends;
-    private final ArrayList<LocationPermission> locationPermissions;
+    private final ArrayList<Friend> friends;
 
     public User(int index, int id, String username, String password, LocationData lastLocation,
-                ArrayList<User> friends, ArrayList<LocationPermission> locationPermissions) {
+                ArrayList<Friend> friends) {
         this.index = index;
         this.id = id;
         this.username = username;
         this.password = password;
         this.lastLocationData = lastLocation;
         this.friends = friends;
-        this.locationPermissions = locationPermissions;
     }
 
     public int getIndex() {
@@ -51,11 +52,7 @@ public class User implements Serializable {
         return lastLocationData;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<Friend> getFriends() {
         return friends;
-    }
-
-    public ArrayList<LocationPermission> getLocationPermissions() {
-        return locationPermissions;
     }
 }
