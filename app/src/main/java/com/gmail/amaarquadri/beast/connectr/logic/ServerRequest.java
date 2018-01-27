@@ -8,16 +8,35 @@ import java.io.Serializable;
 
 public class ServerRequest implements Serializable {
     public enum Type {
-        LOGIN;
+        LOGIN, ADD_FRIEND;
     }
 
     private final Type type;
     private final String username;
     private final String password;
+    private final String newFriendUsername;
 
-    public ServerRequest(String username, String password) {
-        this.type = Type.LOGIN;
-        this.username = username;
-        this.password = password;
+    private ServerRequest(Type type, String s1, String s2) {
+        if (type == Type.LOGIN) {
+            this.type = Type.LOGIN;
+            username = s1;
+            password = s2;
+            newFriendUsername = null;
+        }
+        else if (type == Type.ADD_FRIEND) {
+            this.type = Type.ADD_FRIEND;
+            username = s1;
+            password = null;
+            newFriendUsername = s2;
+        }
+        else throw new UnsupportedOperationException();
+    }
+
+    public static ServerRequest createLoginServerRequest(String username, String password) {
+        return new ServerRequest(Type.LOGIN, username, password);
+    }
+
+    public static ServerRequest createAddFriendServerRequest(String username, String newFriendUsername) {
+        return new ServerRequest(Type.ADD_FRIEND, username, newFriendUsername);
     }
 }
