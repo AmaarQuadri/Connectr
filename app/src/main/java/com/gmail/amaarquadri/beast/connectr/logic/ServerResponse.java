@@ -8,21 +8,25 @@ import java.io.Serializable;
 
 public class ServerResponse implements Serializable {
     public enum Type {
-        LOGIN_RESULT, LOGIN_FAILED
+        LOGIN_RESULT, LOGIN_FAILED, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILED
     }
 
     private final Type type;
     private final User user;
+    private final Friend newFriend;
 
-    public ServerResponse() {
-        type = Type.LOGIN_FAILED;
+    public ServerResponse(Type type) {
+        this.type = type;
         user = null;
+        newFriend = null;
     }
 
-    public ServerResponse(User user) {
-        type = Type.LOGIN_RESULT;
+    public ServerResponse(Type type, User user) {
+        this.type = type;
         this.user = user;
     }
+
+
 
     public Type getType() {
         return type;
