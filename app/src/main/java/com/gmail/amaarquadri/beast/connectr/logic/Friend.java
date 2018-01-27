@@ -1,6 +1,4 @@
-package com.gmail.amaarquadri.beast.connectr;
-
-import java.util.TreeMap;
+package com.gmail.amaarquadri.beast.connectr.logic;
 
 /**
  * Created by amandamorin on 2018-01-27.

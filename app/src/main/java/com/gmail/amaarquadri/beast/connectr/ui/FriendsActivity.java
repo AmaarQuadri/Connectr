@@ -1,18 +1,18 @@
-package com.gmail.amaarquadri.beast.connectr;
+package com.gmail.amaarquadri.beast.connectr.ui;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.gmail.amaarquadri.beast.connectr.logic.Friend;
+import com.gmail.amaarquadri.beast.connectr.R;
+import com.gmail.amaarquadri.beast.connectr.logic.User;
+
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.TreeMap;
 
 /**
  * Created by amandamorin on 2018-01-27.
@@ -20,18 +20,21 @@ import java.util.TreeMap;
 
 public class FriendsActivity extends Activity {
     private LinearLayout friendsLinearLayout;
+    private Switch allFriendsSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         User user = (User) getIntent().getSerializableExtra("user");
         friendsLinearLayout = findViewById(R.id.friends_list);
+        allFriendsSwitch = findViewById(R.id.all_friends);
 
-        TreeMap<User, Boolean> friends = user.getFriendsMap();
-        friends.sort(Comparator.comparing(User::getUsername));
-        ArrayList<User> friendsWithAccess();
+        ArrayList<Friend> friends = user.getFriends();
+        if (friends.isEmpty()) return;
+        friends.sort(Comparator.comparing(Friend::getUsername));
 
-        for (User friend : user.getFriends()) {
+        boolean allFriendsHavePermission = true;
+        for (Friend friend : user.getFriends()) {
             LinearLayout friendRow = new LinearLayout(this);
             friendRow.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -43,11 +46,14 @@ public class FriendsActivity extends Activity {
             friendRow.addView(friendNameTextView);
 
             ToggleButton button = new ToggleButton(this);
-
+            if (friend.hasPermission()) button.setSelected(true);
+            else allFriendsHavePermission = false;
             button.setOnClickListener(view -> {
 
             });
             friendRow.addView(button);
         }
+
+        if (allFriendsHavePermission) allFriendsSwitch.setChecked(true);
     }
 }

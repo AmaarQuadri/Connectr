@@ -1,4 +1,4 @@
-package com.gmail.amaarquadri.beast.connectr;
+package com.gmail.amaarquadri.beast.connectr.logic;
 
 import android.support.annotation.NonNull;
 

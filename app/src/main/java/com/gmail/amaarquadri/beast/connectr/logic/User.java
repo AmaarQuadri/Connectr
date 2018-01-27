@@ -1,12 +1,7 @@
-package com.gmail.amaarquadri.beast.connectr;
-
-import android.os.Parcelable;
+package com.gmail.amaarquadri.beast.connectr.logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * Created by amaar on 2018-01-27.
