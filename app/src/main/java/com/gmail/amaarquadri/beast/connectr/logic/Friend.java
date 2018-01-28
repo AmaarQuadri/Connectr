@@ -1,7 +1,4 @@
-package com.gmail.amaarquadri.beast.connectr.server.logic;
-
-import com.gmail.amaarquadri.beast.connectr.logic.LocationData;
-import com.gmail.amaarquadri.beast.connectr.logic.User;
+package com.gmail.amaarquadri.beast.connectr.logic;
 
 /**
  * Created by amandamorin on 2018-01-27.
