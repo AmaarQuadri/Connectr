@@ -11,11 +11,15 @@ import android.support.annotation.Nullable;
  */
 
 public class UpdateLocationService extends Service {
+    //private FusedLocationProviderClient mFusedLocationClient
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+
 
     private Location getLocation() {
         return null;
