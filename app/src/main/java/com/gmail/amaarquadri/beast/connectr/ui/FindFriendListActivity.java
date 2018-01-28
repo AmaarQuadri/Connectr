@@ -17,17 +17,15 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
  * Created by amandamorin on 2018-01-27.
  */
 public class FindFriendListActivity extends Activity {
-    private LinearLayout sharingListLinearLayout;
     private User user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_friend_list);
-
-        sharingListLinearLayout = findViewById(R.id.sharing_list);
         user = (User) getIntent().getSerializableExtra("user");
 
+        LinearLayout sharingListLinearLayout = findViewById(R.id.sharing_list);
         final Intent intent = new Intent(this, FindFriendActivity.class);
         intent.putExtra("user", user);
         for (Friend friend : user.getFriends()) if (friend.iHavePermission()) {
@@ -46,6 +44,8 @@ public class FindFriendListActivity extends Activity {
                 startActivity(intent);
             });
             friendRow.addView(button);
+
+            sharingListLinearLayout.addView(friendRow);
         }
     }
 

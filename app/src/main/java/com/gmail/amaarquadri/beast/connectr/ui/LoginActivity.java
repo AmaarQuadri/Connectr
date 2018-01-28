@@ -14,10 +14,11 @@ import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
+import java.io.IOException;
+
 /**
  * Created by amaar on 2018-01-27.
  */
-
 public class LoginActivity extends Activity {
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -47,7 +48,13 @@ public class LoginActivity extends Activity {
             return;
         }
 
-        ServerResponse response = ServerUtils.sendToServer(ServerRequest.createLoginServerRequest(username, password));
+        ServerResponse response;
+        try {
+            response = ServerUtils.sendToServer(ServerRequest.createLoginServerRequest(username, password));
+        } catch (IOException | ClassNotFoundException e) {
+            Toast.makeText(this, "Unable to connect to server.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (response.getType() == ServerResponse.Type.LOGIN_FAILED) {
             Toast.makeText(this, "Login failed. Please try again or make a new account.",
                     Toast.LENGTH_LONG).show();
