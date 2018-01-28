@@ -18,6 +18,7 @@ import java.io.IOException;
 
 /**
  * Created by amaar on 2018-01-27.
+ * Activty to login to a User account.
  */
 public class LoginActivity extends Activity {
     private EditText usernameEditText;

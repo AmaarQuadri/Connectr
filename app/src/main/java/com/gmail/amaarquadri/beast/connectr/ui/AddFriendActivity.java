@@ -17,6 +17,7 @@ import java.io.IOException;
 
 /**
  * Created by amaar on 2018-01-27.
+ * Activity to add a new friend.
  */
 public class AddFriendActivity extends Activity {
     private EditText usernameEditText;

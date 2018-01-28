@@ -13,6 +13,7 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 /**
  * Created by amaar on 2018-01-27.
+ * Main Activity to link to other Activities.
  */
 public class MainActivity extends Activity {
     private User user;

@@ -10,6 +10,7 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 /**
  * Created by amaar on 2018-01-27.
+ * Shows the direction of the desired friend.
  */
 public class FindFriendActivity extends Activity {
     private User user;

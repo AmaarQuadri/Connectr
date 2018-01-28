@@ -1,14 +1,10 @@
 package com.gmail.amaarquadri.beast.connectr.ui;
 
-import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -18,8 +14,8 @@ import java.util.concurrent.Executor;
 
 /**
  * Created by amaar on 2018-01-27.
+ * Background service that updates my location as needed.
  */
-
 public class UpdateLocationService extends Service {
     //
     private FusedLocationProviderClient mFusedLocationClient;
@@ -45,7 +41,7 @@ public class UpdateLocationService extends Service {
                 }
             }
         });
-    }catch(SecurityException e){
+    } catch(SecurityException e){
         //todo
 
     }

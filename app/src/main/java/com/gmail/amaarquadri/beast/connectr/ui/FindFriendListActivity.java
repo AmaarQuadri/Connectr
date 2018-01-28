@@ -15,6 +15,7 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 /**
  * Created by amandamorin on 2018-01-27.
+ * Shows a list of all Friends that I can find right now.
  */
 public class FindFriendListActivity extends Activity {
     private User user;

@@ -22,8 +22,8 @@ import java.util.Comparator;
 
 /**
  * Created by amandamorin on 2018-01-27.
+ * List of friends that can see my Location data.
  */
-
 public class FriendsPermissionActivity extends Activity {
     private LinearLayout friendsLinearLayout;
     private Switch allFriendsSwitch;
