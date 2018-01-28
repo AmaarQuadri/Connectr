@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.LoginPageActivity">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +18,9 @@
         </activity>
         <activity android:name=".ui.AddFriendActivity" />
         <activity android:name=".ui.FindFriendActivity" />
-        <activity android:name=".ui.FriendsActivity" />
+        <activity android:name=".ui.FriendsPermissionActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.SignupPageActivity" />
+        <activity android:name=".ui.SignupActivity" />
     </application>
 
 </manifest>
