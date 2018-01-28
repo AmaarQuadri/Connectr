@@ -1,7 +1,5 @@
 package com.gmail.amaarquadri.beast.connectr.logic;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -48,19 +46,5 @@ public class ServerAsync {
             e.printStackTrace();
             throw new IOException("No IO connection", e);
         }
-    }
-
-    private static ServerResponse deserializeServerResponse(String serverResponse) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(serverResponse.getBytes()))) {
-            return (ServerResponse) inputStream.readObject();
-        }
-    }
-
-    private static String serializeServerRequest(ServerRequest serverRequest) throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream outputStream = new ObjectOutputStream(byteArrayOutputStream);
-        outputStream.writeObject(serverRequest);
-        outputStream.close();
-        return byteArrayOutputStream.toString();
     }
 }
