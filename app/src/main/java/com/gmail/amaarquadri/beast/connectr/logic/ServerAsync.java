@@ -33,7 +33,7 @@ public class ServerAsync {
 
     private static void initializeConnection() throws IOException {
         try {
-            Socket socket = new Socket("172.30.155.93", 4321); //"DESKTOP-8M8UDU4"
+            Socket socket = new Socket("connectrbeast.com", 4321); //DESKTOP-8M8UDU4 172.30.155.93
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
             connectionInitialized = true;
