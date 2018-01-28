@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/friends_list"
+        android:id="@+id/requests_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" />  <!-- should create a list of friends with buttons next
-        to them that can be pushed to request location data. -->
-
+        android:orientation="vertical" /> <!-- create a list of requests with buttons beside to
+        share location toggle on/off -->
 
 </LinearLayout>
