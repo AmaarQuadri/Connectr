@@ -18,7 +18,6 @@ import java.io.IOException;
 /**
  * Created by amaar on 2018-01-27.
  */
-
 public class AddFriendActivity extends Activity {
     private EditText usernameEditText;
     private User user;
