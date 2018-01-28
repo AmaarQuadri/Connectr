@@ -14,7 +14,7 @@ public class Friend extends User {
         this.friendHasPermission = friendHasPermission;
     }
 
-    public void setiHavePermission(boolean iHavePermission) {
+    public void setIHavePermission(boolean iHavePermission) {
         this.iHavePermission = iHavePermission;
     }
 
