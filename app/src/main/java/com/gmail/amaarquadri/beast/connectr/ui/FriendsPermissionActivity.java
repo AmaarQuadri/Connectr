@@ -27,7 +27,7 @@ public class FriendsPermissionActivity extends Activity {
         super.onCreate(savedInstanceState);
         User user = (User) getIntent().getSerializableExtra("user");
         friendsLinearLayout = findViewById(R.id.friends_list);
-        allFriendsSwitch = findViewById(R.id.all_friends);
+        allFriendsSwitch = findViewById(R.id.all_friends_switch);
 
         ArrayList<Friend> friends = user.getFriends();
         if (friends.isEmpty()) return;
@@ -55,5 +55,6 @@ public class FriendsPermissionActivity extends Activity {
         }
 
         if (allFriendsHavePermission) allFriendsSwitch.setChecked(true);
+
     }
 }
