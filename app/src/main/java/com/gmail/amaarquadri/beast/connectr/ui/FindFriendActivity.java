@@ -33,5 +33,14 @@ public class FindFriendActivity extends Activity {
         Location locFriend = new Location (friend.getLastLocationData());
         float bearing = locUser.bearingTo(locFriend);
     }
+
+    private Location toLocation(LocationData locationData) {
+        //TODO: figure out what to put as provider String
+        Location result = new Location("Database");
+        result.setLongitude(locationData.getLongitude());
+        result.setLatitude(locationData.getLatitude());
+        result.setTime(locationData.getLastUpdateUnixTime());
+        return result;
+    }
 }
 
