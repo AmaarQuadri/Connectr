@@ -50,7 +50,7 @@ public class LoginActivity extends Activity {
         }
 
         ServerAsync.sendToServer(ServerRequest.createLoginServerRequest(username, password), (response) -> {
-            if (response.getType() == ServerResponse.Type.FAILED) {
+            if (response == null || response.getType() == ServerResponse.Type.FAILED) {
                 Toast.makeText(this, "Login failed. Please try again or make a new account.",
                         Toast.LENGTH_LONG).show();
                 return;
