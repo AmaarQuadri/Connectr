@@ -25,10 +25,7 @@ public class FindFriendActivity extends Activity {
         user = (User) getIntent().getSerializableExtra("user");
         friend = (Friend) getIntent().getSerializableExtra("friend");
 
-        //mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        //FindFriendActivity = LocationServices.getFusedLocationProviderClient(this);
     }
-
-
-
 }
 
