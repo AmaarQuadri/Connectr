@@ -35,10 +35,6 @@ public class MainActivity extends Activity {
         if (allFriendsHavePermission) friendsButton.setText("All Friends");
         else if (noFriendsHavePermission) friendsButton.setText("Nobody");
         else friendsButton.setText("SomeFriends");
-
-        Intent serviceIntent = new Intent(this, PollLocationAsync.class);
-        serviceIntent.putExtra("user", user);
-        startService(serviceIntent);
     }
 
     public void addFriend(View view) {
