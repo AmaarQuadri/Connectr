@@ -2,6 +2,7 @@ package com.gmail.amaarquadri.beast.connectr.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ public class FindFriendActivity extends Activity {
     private ImageView arrowImageView;
     private Location userLocation;
     private Location friendLocation;
+    private SensorManager mSensorManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class FindFriendActivity extends Activity {
         friend = (Friend) getIntent().getSerializableExtra("friend");
 
         Context this_ = this;
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         new Thread(() -> {
             PollLocationAsync.pollLocation(this_, location -> {
                 synchronized (this_) {
@@ -46,25 +49,30 @@ public class FindFriendActivity extends Activity {
                     friendLocation = toLocation(response.getLocationData());
                 }
             });
-            /* protected void onMeasure(int widthSpecId, int heightSpecId) {
-                Log.e(TAG, "onMeasure" + widthSpecId);
-                setMeasuredDimension(SCREEN_WIDTH, SCREEN_HEIGHT -
-                        game.findViewById(R.id.flag).getHeight());
-            }
+
+
+
             while (userLocation == null && friendLocation == null) {}
             synchronized (this_) {
-                float bearing = userLocation.bearingTo(friendLocation);
-                int centerx = ImageView.ge/2;
-                int centery = height/2;
-                canvas.drawLine(centerx, 0, centerx, height, paint);
-                canvas.drawLine(0, centery, width, centery, paint);
-                // Rotate the canvas with the azimut
-                if (azimut != null)
-                    canvas.rotate(-azimut*360/(2*3.14159f), centerx, centery);
-                paint.setColor(0xff0000ff);
-                arrowImageView.setRotation(bearing); 
+                float initialBearing = userLocation.bearingTo(friendLocation);
 
-            }*/
+                // Rotation matrix based on current readings from accelerometer and magnetometer.
+                final float[] rotationMatrix = new float[9];
+                mSensorManager.getRotationMatrix(rotationMatrix, null,
+                        accelerometerReading, magnetometerReading);
+
+                // Express the updated rotation matrix as three orientation angles.
+                final float[] orientationAngles = new float[3];
+                mSensorManager.getOrientation(rotationMatrix, orientationAngles);
+                private SensorManager mSensorManager;
+                private final float[] mAccelerometerReading = new float[3];
+                private final float[] mMagnetometerReading = new float[3];
+
+                private final float[] mRotationMatrix = new float[9];
+                private final float[] mOrientationAngles = new float[3];
+                arrowImageView.setRotation(bearing);
+
+            }
         }).start();
     }
 
@@ -77,4 +85,5 @@ public class FindFriendActivity extends Activity {
         return result;
     }
 }
+
 
