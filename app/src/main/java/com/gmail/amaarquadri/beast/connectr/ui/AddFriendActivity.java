@@ -33,12 +33,12 @@ public class AddFriendActivity extends Activity {
     public void addFriend(View view) {
         ServerAsync.sendToServer(ServerRequest.createAddFriendServerRequest(user, usernameEditText.getText().toString()), (response) -> {
             if (response == null || response.getType() == ServerResponse.Type.FAILED) {
-                Toast.makeText(this, "That user doesn't exist.", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(this, "That user doesn't exist.", Toast.LENGTH_SHORT).show());
             }
             else {
                 user.getFriends().add(response.getNewFriend());
                 usernameEditText.getText().clear();
-                Toast.makeText(this, "Friend added!", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(this, "Friend added!", Toast.LENGTH_SHORT).show());
             }
         });
     }

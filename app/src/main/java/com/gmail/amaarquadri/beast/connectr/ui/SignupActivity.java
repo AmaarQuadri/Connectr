@@ -54,8 +54,8 @@ public class SignupActivity extends Activity {
 
         ServerAsync.sendToServer(ServerRequest.createCreateAccountServerRequest(username, password), (response) -> {
             if (response == null || response.getType() == ServerResponse.Type.FAILED) {
-                Toast.makeText(this, "That username is already taken, sorry!",
-                        Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> Toast.makeText(this, "That username is already taken, sorry!",
+                        Toast.LENGTH_SHORT).show());
                 usernameEditText.getText().clear();
                 passwordEditText.getText().clear();
                 reenterPasswordEditText.getText().clear();
