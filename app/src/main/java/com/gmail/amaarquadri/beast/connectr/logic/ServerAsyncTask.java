@@ -56,17 +56,26 @@ public class ServerAsyncTask extends AsyncTask<ServerRequest, Void, ServerRespon
     }
 
     private static ServerResponse deserializeServerResponse(String serverResponse) throws IOException, ClassNotFoundException {
-        ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(serverResponse)));
-        ServerResponse response = (ServerResponse) inputStream.readObject();
-        inputStream.close();
-        return response;
+        try {
+            byte b[] = serverResponse.getBytes();
+            ByteArrayInputStream bi = new ByteArrayInputStream(b);
+            ObjectInputStream si = new ObjectInputStream(bi);
+            ServerResponse obj = (ServerResponse) si.readObject();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     private static String serializeServerRequest(ServerRequest serverRequest) throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(serverRequest);
-        objectOutputStream.close();
-        return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
+        String serializedObject = "";
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream so = new ObjectOutputStream(bo);
+            so.writeObject(serverRequest);
+            so.flush();
+            serializedObject = bo.toString();
+        }
+        catch(IOException)
+        return serializedObject;
     }
 }
