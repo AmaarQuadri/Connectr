@@ -65,7 +65,7 @@ public class FriendsPermissionActivity extends Activity {
                         //TODO: handle
                         return;
                     }
-                    if (response.getType() == ServerResponse.Type.ENABLE_PERMISSION_FAILED) {
+                    if (response.getType() == ServerResponse.Type.FAILED) {
                         //TODO: handle
                         return;
                     }
@@ -79,7 +79,7 @@ public class FriendsPermissionActivity extends Activity {
                         //TODO: handle
                         return;
                     }
-                    if (response.getType() == ServerResponse.Type.DISABLE_PERMISSION_FAILED) {
+                    if (response.getType() == ServerResponse.Type.FAILED) {
                         //TODO: handle
                         return;
                     }

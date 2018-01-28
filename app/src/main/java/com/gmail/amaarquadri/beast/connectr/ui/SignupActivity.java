@@ -62,7 +62,7 @@ public class SignupActivity extends Activity {
             return;
         }
 
-        if (response.getType() == ServerResponse.Type.LOGIN_FAILED) {
+        if (response.getType() == ServerResponse.Type.FAILED) {
             Toast.makeText(this, "That username is already taken, sorry!",
                     Toast.LENGTH_SHORT).show();
             usernameEditText.getText().clear();

@@ -40,7 +40,7 @@ public class AddFriendActivity extends Activity {
             Toast.makeText(this, "Cannot connect to Server.", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (response.getType() == ServerResponse.Type.ADD_FRIEND_SUCCESS) {
+        if (response.getType() == ServerResponse.Type.SUCCESS) {
             user.getFriends().add(response.getNewFriend());
             usernameEditText.getText().clear();
             Toast.makeText(this, "Friend added!", Toast.LENGTH_SHORT).show();
