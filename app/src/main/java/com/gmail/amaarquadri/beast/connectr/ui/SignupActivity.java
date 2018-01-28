@@ -1,6 +1,7 @@
 package com.gmail.amaarquadri.beast.connectr.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -8,6 +9,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gmail.amaarquadri.beast.connectr.R;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
+
+import java.io.IOException;
 
 /**
  * Created by amaar on 2018-01-27.
@@ -30,35 +36,43 @@ public class SignupActivity extends Activity {
     }
 
     public void create(View view) {
-        String myUsername = usernameEditText.getText().toString();
-        String myEmail = emailEditText.getText().toString();
-        String myPassword = passwordEditText.getText().toString();
-        String myPasswordRepeat = reenterPasswordEditText.getText().toString();
+        String username = usernameEditText.getText().toString();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+        String passwordRepeat = reenterPasswordEditText.getText().toString();
 
-        if (!myPassword.equals(myPasswordRepeat))
-        {
+        if (!password.equals(passwordRepeat)) {
             Toast.makeText(this, "Your passwords do not match! Please reenter your information", Toast.LENGTH_SHORT).show();
             passwordEditText.getText().clear();
             reenterPasswordEditText.getText().clear();
             return;
         }
 
-        if (myUsername.isEmpty() || myPassword.isEmpty() || myPasswordRepeat.isEmpty() || myEmail.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty() || passwordRepeat.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "All fields must have entries",
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // if() (if username is in the database already,
-        {
+        ServerResponse response;
+        try {
+            response = ServerUtils.sendToServer(ServerRequest.createCreateAccountServerRequest(username, password));
+        } catch (IOException | ClassNotFoundException e) {
+            Toast.makeText(this, "Cannot connect to server.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (response.getType() == ServerResponse.Type.LOGIN_FAILED) {
             Toast.makeText(this, "That username is already taken, sorry!",
                     Toast.LENGTH_SHORT).show();
             usernameEditText.getText().clear();
             passwordEditText.getText().clear();
             reenterPasswordEditText.getText().clear();
-            return;
         }
-
-
+        else {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("user", response.getUser());
+            startActivity(intent);
+        }
     }
 }
