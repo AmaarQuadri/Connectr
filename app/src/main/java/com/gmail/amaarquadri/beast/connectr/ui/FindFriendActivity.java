@@ -1,11 +1,13 @@
 package com.gmail.amaarquadri.beast.connectr.ui;
 
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.Friend;
+import com.gmail.amaarquadri.beast.connectr.logic.LocationData;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 /**
@@ -26,6 +28,10 @@ public class FindFriendActivity extends Activity {
         friend = (Friend) getIntent().getSerializableExtra("friend");
 
         //FindFriendActivity = LocationServices.getFusedLocationProviderClient(this);
+
+        Location locUser = new Location (user.getLastLocationData());
+        Location locFriend = new Location (friend.getLastLocationData());
+        float bearing = locUser.bearingTo(locFriend);
     }
 }
 
