@@ -15,21 +15,25 @@ import java.util.Base64;
 
 public class ServerUtils {
     @NonNull
-    public static ServerResponse sendToServer(ServerRequest serverRequest) {
-        return null;
+    public static ServerResponse sendToServer(ServerRequest serverRequest) throws IOException {
+        String out = serializeServerRequest(serverRequest);
+        //send data
+        //get back data
+        String in = ;
+        return deserializeServerResponse(in);
     }
 
-    private static ServerRequest deserializeServerRequest(String serverRequest) throws IOException, ClassNotFoundException {
-        ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(serverRequest)));
-        ServerRequest request  = (ServerRequest) inputStream.readObject();
+    private static ServerResponse deserializeServerResponse(String serverResponse) throws IOException, ClassNotFoundException {
+        ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(serverResponse)));
+        ServerResponse response = (ServerResponse) inputStream.readObject();
         inputStream.close();
-        return request;
+        return response;
     }
 
-    private static String serializeServerResponse(ServerResponse serverResponse) throws IOException {
+    private static String serializeServerRequest(ServerRequest serverRequest) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(serverResponse);
+        objectOutputStream.writeObject(serverRequest);
         objectOutputStream.close();
         return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
     }
