@@ -11,13 +11,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:onClick="logout"
-        android:text="log out" />
+        android:text="log out"
+        android:textColor="#0000EE"
+        android:background="#FAFAFA"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="addFriend"
-        android:text="Add Friends" />
+        android:text="+ Add Friends" />
 
     <LinearLayout
         android:layout_width="match_parent"

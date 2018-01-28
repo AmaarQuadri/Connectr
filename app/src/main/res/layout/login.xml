@@ -67,7 +67,7 @@
             android:textSize="20sp"
             android:onClick="createAccount"
             android:textColor="#0000EE"
-            android:background="#FFFFFF"/>
+            android:background="#FAFAFA"/>
     </LinearLayout>
 </LinearLayout>
 
