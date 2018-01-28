@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.Friend;
@@ -17,12 +18,15 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
 public class FindFriendActivity extends Activity {
     private User user;
     private Friend friend;
+    private ImageView arrowImageView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_friend);
 
+        arrowImageView = findViewById(R.id.arrowImage);
         user = (User) getIntent().getSerializableExtra("user");
         friend = (Friend) getIntent().getSerializableExtra("friend");
 
@@ -31,6 +35,8 @@ public class FindFriendActivity extends Activity {
         Location locUser = toLocation(user.getLastLocationData());
         Location locFriend = toLocation(friend.getLastLocationData());
         float bearing = locUser.bearingTo(locFriend);
+        arrowImageView.setRotation(bearing);
+
     }
 
     private Location toLocation(LocationData locationData) {

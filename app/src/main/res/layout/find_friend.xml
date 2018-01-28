@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.FindFriendActivity">
 
     <com.gmail.amaarquadri.beast.connectr.ui.SquareImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center"
         android:src="@drawable/arrow_up"
-        android:rotation="90"/>
+        android:id="@+id/arrowImage"
+        android:rotation=""/>
 
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="You are finding   . They are    meters away"
+        tools:text="You are finding Amaar. They are 1 meters away"
         android:textSize="24sp"/>
 
 </LinearLayout>
