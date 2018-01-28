@@ -30,7 +30,7 @@ public class SignupActivity extends Activity {
     }
 
     public void create(View view) {
-        String myUserame = usernameEditText.getText().toString();
+        String myUsername = usernameEditText.getText().toString();
         String myEmail = emailEditText.getText().toString();
         String myPassword = passwordEditText.getText().toString();
         String myPasswordRepeat = reenterPasswordEditText.getText().toString();
@@ -40,6 +40,23 @@ public class SignupActivity extends Activity {
             Toast.makeText(this, "Your passwords do not match! Please reenter your information", Toast.LENGTH_SHORT).show();
             passwordEditText.getText().clear();
             reenterPasswordEditText.getText().clear();
+            return;
+        }
+
+        if (myUsername.isEmpty() || myPassword.isEmpty() || myPasswordRepeat.isEmpty() || myEmail.isEmpty()) {
+            Toast.makeText(this, "All fields must have entries",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // if() (if username is in the database already,
+        {
+            Toast.makeText(this, "That username is already taken, sorry!",
+                    Toast.LENGTH_SHORT).show();
+            usernameEditText.getText().clear();
+            passwordEditText.getText().clear();
+            reenterPasswordEditText.getText().clear();
+            return;
         }
 
 
