@@ -1,8 +1,5 @@
 package com.gmail.amaarquadri.beast.connectr.logic;
 
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,29 +10,32 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Base64;
 
 /**
- * Created by amaar on 2018-01-27.
+ * Created by amaar on 2018-01-28.
  */
-public class ServerAsyncTask extends AsyncTask<ServerRequest, Void, ServerResponse> {
+public class ServerAsync {
     private static boolean connectionInitialized = false;
     private static PrintWriter out;
     private static BufferedReader in;
 
-    @Override
-    protected ServerResponse doInBackground(ServerRequest... serverRequests) {
-        try {
-            if (!connectionInitialized) initializeConnection();
-            out.println(serializeServerRequest(serverRequests[0]));
+    public interface Callback {
+        void onFinish(ServerResponse serverResponse);
+    }
 
-            String input = in.readLine();
+    public static void sendToServer(ServerRequest serverRequest, Callback callback) {
+        new Thread(() -> {
+            try {
+                if (!connectionInitialized) initializeConnection();
+                out.println(serializeServerRequest(serverRequest));
 
-            return deserializeServerResponse(input);
-        }
-        catch (IOException | ClassNotFoundException e) {
-            return null;
-        }
+                String input = in.readLine();
+                callback.onFinish(deserializeServerResponse(input));
+            }
+            catch (IOException | ClassNotFoundException e) {
+                callback.onFinish(null);
+            }
+        }).start();
     }
 
     private static void initializeConnection() throws IOException {
@@ -56,26 +56,16 @@ public class ServerAsyncTask extends AsyncTask<ServerRequest, Void, ServerRespon
     }
 
     private static ServerResponse deserializeServerResponse(String serverResponse) throws IOException, ClassNotFoundException {
-        try {
-            byte b[] = serverResponse.getBytes();
-            ByteArrayInputStream bi = new ByteArrayInputStream(b);
-            ObjectInputStream si = new ObjectInputStream(bi);
-            ServerResponse obj = (ServerResponse) si.readObject();
-        } catch (Exception e) {
-            System.out.println(e);
+        try (ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(serverResponse.getBytes()))) {
+            return (ServerResponse) inputStream.readObject();
         }
     }
 
     private static String serializeServerRequest(ServerRequest serverRequest) throws IOException {
-        String serializedObject = "";
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream so = new ObjectOutputStream(bo);
-            so.writeObject(serverRequest);
-            so.flush();
-            serializedObject = bo.toString();
-        }
-        catch(IOException)
-        return serializedObject;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream outputStream = new ObjectOutputStream(byteArrayOutputStream);
+        outputStream.writeObject(serverRequest);
+        outputStream.close();
+        return byteArrayOutputStream.toString();
     }
 }

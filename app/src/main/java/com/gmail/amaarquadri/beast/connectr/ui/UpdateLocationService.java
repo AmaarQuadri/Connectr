@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.gmail.amaarquadri.beast.connectr.logic.LocationData;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsync;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
-import java.io.IOException;
 import java.util.concurrent.Executor;
 
 /**
@@ -44,16 +43,11 @@ public class UpdateLocationService extends IntentService {
             locationClient.getLastLocation().addOnSuccessListener((Executor) this, location -> {
                 if (location != null) {
                     LocationData locationData = new LocationData(location.getLatitude(), location.getLongitude(), location.getTime());
-                    ServerResponse response;
-                    try {
-                        response = ServerAsyncTask.sendToServer(ServerRequest.createUpdateLocationServerRequest(user, locationData));
-                    } catch (IOException | ClassNotFoundException e) {
-                        //TODO: handle
-                        return;
-                    }
-                    if (response.getType() == ServerResponse.Type.FAILED) {
-                        //TODO: handle
-                    }
+                    ServerAsync.sendToServer(ServerRequest.createUpdateLocationServerRequest(user, locationData), (response) -> {
+                        if (response.getType() == ServerResponse.Type.FAILED) {
+                            //TODO: handle
+                        }
+                    });
                 }
                 else {
                     //TODO: something?

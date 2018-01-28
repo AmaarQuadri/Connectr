@@ -8,12 +8,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gmail.amaarquadri.beast.connectr.R;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsync;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
-
-import java.io.IOException;
 
 /**
  * Created by amaar on 2018-01-27.
@@ -33,22 +31,15 @@ public class AddFriendActivity extends Activity {
     }
 
     public void addFriend(View view) {
-        ServerResponse response;
-        try {
-            response = ServerAsyncTask.sendToServer(ServerRequest.createAddFriendServerRequest(user,
-                    usernameEditText.getText().toString()));
-        } catch (IOException | ClassNotFoundException e) {
-            Toast.makeText(this, "Cannot connect to Server.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (response.getType() == ServerResponse.Type.SUCCESS) {
-            user.getFriends().add(response.getNewFriend());
-            usernameEditText.getText().clear();
-            Toast.makeText(this, "Friend added!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(this, "That user doesn't exist.", Toast.LENGTH_SHORT).show();
-        }
-
+        ServerAsync.sendToServer(ServerRequest.createAddFriendServerRequest(user, usernameEditText.getText().toString()), (response) -> {
+            if (response.getType() == ServerResponse.Type.SUCCESS) {
+                user.getFriends().add(response.getNewFriend());
+                usernameEditText.getText().clear();
+                Toast.makeText(this, "Friend added!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this, "That user doesn't exist.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

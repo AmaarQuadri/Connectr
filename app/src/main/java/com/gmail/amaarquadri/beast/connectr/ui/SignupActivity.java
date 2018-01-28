@@ -9,11 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gmail.amaarquadri.beast.connectr.R;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsync;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
-
-import java.io.IOException;
 
 /**
  * Created by amaar on 2018-01-27.
@@ -54,26 +52,19 @@ public class SignupActivity extends Activity {
             return;
         }
 
-        ServerResponse response;
-        try {
-            new ServerAsyncTask().execute(ServerRequest.createCreateAccountServerRequest(username, password));
-            response = ServerAsyncTask.sendToServer();
-        } catch (IOException | ClassNotFoundException e) {
-            Toast.makeText(this, "Cannot connect to server.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (response.getType() == ServerResponse.Type.FAILED) {
-            Toast.makeText(this, "That username is already taken, sorry!",
-                    Toast.LENGTH_SHORT).show();
-            usernameEditText.getText().clear();
-            passwordEditText.getText().clear();
-            reenterPasswordEditText.getText().clear();
-        }
-        else {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("user", response.getUser());
-            startActivity(intent);
-        }
+        ServerAsync.sendToServer(ServerRequest.createCreateAccountServerRequest(username, password), (response) -> {
+            if (response.getType() == ServerResponse.Type.FAILED) {
+                Toast.makeText(this, "That username is already taken, sorry!",
+                        Toast.LENGTH_SHORT).show();
+                usernameEditText.getText().clear();
+                passwordEditText.getText().clear();
+                reenterPasswordEditText.getText().clear();
+            }
+            else {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("user", response.getUser());
+                startActivity(intent);
+            }
+        });
     }
 }

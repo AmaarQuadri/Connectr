@@ -11,12 +11,11 @@ import android.widget.ToggleButton;
 
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.Friend;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsync;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -58,34 +57,16 @@ public class FriendsPermissionActivity extends Activity {
             if (friend.friendHasPermission()) button.setSelected(true);
             else allFriendsHavePermission = false;
             button.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    ServerResponse response;
-                    try {
-                        response = ServerAsyncTask.sendToServer(ServerRequest.createEnablePermissionServerRequest(user, friend));
-                    } catch (IOException | ClassNotFoundException e) {
-                        e.printStackTrace();
-                        //TODO: handle
-                        return;
-                    }
+                if (isChecked) ServerAsync.sendToServer(ServerRequest.createEnablePermissionServerRequest(user, friend), (response) -> {
                     if (response.getType() == ServerResponse.Type.FAILED) {
                         //TODO: handle
-                        return;
                     }
-                }
-                else {
-                    ServerResponse response;
-                    try {
-                        response = ServerAsyncTask.sendToServer(ServerRequest.createDisablePermissionServerRequest(user, friend));
-                    } catch (IOException | ClassNotFoundException e) {
-                        e.printStackTrace();
-                        //TODO: handle
-                        return;
-                    }
+                });
+                else ServerAsync.sendToServer(ServerRequest.createDisablePermissionServerRequest(user, friend), (response) -> {
                     if (response.getType() == ServerResponse.Type.FAILED) {
                         //TODO: handle
-                        return;
                     }
-                }
+                });
             });
             friendRow.addView(button);
         }
