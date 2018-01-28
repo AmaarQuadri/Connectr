@@ -6,6 +6,8 @@ import android.location.Location;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+
 /**
  * Created by amaar on 2018-01-27.
  */
