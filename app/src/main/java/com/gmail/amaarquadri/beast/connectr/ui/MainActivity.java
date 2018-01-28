@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         boolean allFriendsHavePermission = true;
         boolean noFriendsHavePermission = true;
         for (Friend friend : user.getFriends()) {
-            if (friend.hasPermission()) noFriendsHavePermission = false;
+            if (friend.friendHasPermission()) noFriendsHavePermission = false;
             else allFriendsHavePermission = false;
         }
 

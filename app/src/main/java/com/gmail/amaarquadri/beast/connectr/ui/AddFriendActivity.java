@@ -30,7 +30,7 @@ public class AddFriendActivity extends Activity {
     }
 
     public void addFriend(View view) {
-        ServerResponse response = ServerUtils.sendToServer(ServerRequest.createAddFriendServerRequest(user.getUsername(),
+        ServerResponse response = ServerUtils.sendToServer(ServerRequest.createAddFriendServerRequest(user,
                 usernameEditText.getText().toString()));
         if (response.getType() == ServerResponse.Type.ADD_FRIEND_SUCCESS) {
             user.getFriends().add(response.getNewFriend());

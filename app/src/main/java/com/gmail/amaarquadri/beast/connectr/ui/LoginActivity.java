@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
             return;
         }
 
-        ServerResponse response = ServerUtils.sendToServer(new ServerRequest(username, password));
+        ServerResponse response = ServerUtils.sendToServer(ServerRequest.createLoginServerRequest(username, password));
         if (response.getType() == ServerResponse.Type.LOGIN_FAILED) {
             Toast.makeText(this, "Login failed. Please try again or make a new account.",
                     Toast.LENGTH_LONG).show();

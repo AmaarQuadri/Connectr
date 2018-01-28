@@ -46,7 +46,7 @@ public class FriendsPermissionActivity extends Activity {
             friendRow.addView(friendNameTextView);
 
             ToggleButton button = new ToggleButton(this);
-            if (friend.hasPermission()) button.setSelected(true);
+            if (friend.friendHasPermission()) button.setSelected(true);
             else allFriendsHavePermission = false;
             button.setOnClickListener(view -> {
 
