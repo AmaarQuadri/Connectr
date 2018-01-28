@@ -7,4 +7,8 @@ import android.app.Activity;
  */
 
 public class FindFriendListActivity extends Activity {
+
+    //for (Friend friend : user.getFriends())
+
+
 }
