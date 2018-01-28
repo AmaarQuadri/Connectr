@@ -4,6 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.gmail.amaarquadri.beast.connectr.ui.SquareImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/arrow_up"
+        android:rotation="90"/>
 
+    <android.support.v7.widget.AppCompatCheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You are finding   . They are    meters away"
+        android:textSize="24sp"/>
 
 </LinearLayout>
