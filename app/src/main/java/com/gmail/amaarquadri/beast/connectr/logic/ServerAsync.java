@@ -40,7 +40,7 @@ public class ServerAsync {
 
     private static void initializeConnection() throws IOException {
         try {
-            Socket socket = new Socket("172.30.158.237", 4321);
+            Socket socket = new Socket("172.30.155.93", 4321); //"DESKTOP-8M8UDU4"
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             connectionInitialized = true;
