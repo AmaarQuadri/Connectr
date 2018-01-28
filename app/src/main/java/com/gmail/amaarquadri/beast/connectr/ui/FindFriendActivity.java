@@ -46,14 +46,25 @@ public class FindFriendActivity extends Activity {
                     friendLocation = toLocation(response.getLocationData());
                 }
             });
-
+            /* protected void onMeasure(int widthSpecId, int heightSpecId) {
+                Log.e(TAG, "onMeasure" + widthSpecId);
+                setMeasuredDimension(SCREEN_WIDTH, SCREEN_HEIGHT -
+                        game.findViewById(R.id.flag).getHeight());
+            }
             while (userLocation == null && friendLocation == null) {}
             synchronized (this_) {
+                float bearing = userLocation.bearingTo(friendLocation);
+                int centerx = ImageView.ge/2;
+                int centery = height/2;
+                canvas.drawLine(centerx, 0, centerx, height, paint);
+                canvas.drawLine(0, centery, width, centery, paint);
+                // Rotate the canvas with the azimut
+                if (azimut != null)
+                    canvas.rotate(-azimut*360/(2*3.14159f), centerx, centery);
+                paint.setColor(0xff0000ff);
+                arrowImageView.setRotation(bearing); 
 
-            }
-
-            float bearing = locUser.bearingTo(locFriend);
-            arrowImageView.setRotation(bearing);
+            }*/
         }).start();
     }
 
