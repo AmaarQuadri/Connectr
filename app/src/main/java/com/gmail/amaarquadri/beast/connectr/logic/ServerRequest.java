@@ -26,7 +26,7 @@ public class ServerRequest implements Serializable {
             username = s1;
             password = s2;
             newFriendUsername = null;
-            locationData =null;
+            locationData = null;
         }
         else if (type == Type.LOGIN) {
             this.type = Type.LOGIN;
@@ -85,6 +85,10 @@ public class ServerRequest implements Serializable {
             locationData = location;
         }
         else throw new UnsupportedOperationException();
+    }
+
+    public static ServerRequest createCreateAccountServerRequest(String username, String password) {
+        return new ServerRequest(Type.CREATE_ACCOUNT, null, null, username, password, null);
     }
 
     public static ServerRequest createLoginServerRequest(String username, String password) {
