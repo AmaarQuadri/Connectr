@@ -56,7 +56,7 @@ public class LoginActivity extends Activity {
             Toast.makeText(this, "Unable to connect to server.", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (response.getType() == ServerResponse.Type.LOGIN_FAILED) {
+        if (response.getType() == ServerResponse.Type.FAILED) {
             Toast.makeText(this, "Login failed. Please try again or make a new account.",
                     Toast.LENGTH_LONG).show();
         }
