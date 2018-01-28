@@ -37,9 +37,8 @@ public class FindFriendActivity extends Activity {
         new Thread(() -> {
             Location locUser = toLocation(user.getLastLocationData());
             Location locFriend = toLocation(friend.getLastLocationData());
-            ServerAsync.sendToServer(ServerRequest.GET_LOCATION, (response) -> {
-
-            });
+            ServerAsync.sendToServer(ServerRequest.createGetLocationServerRequest(user, friend),
+                    (response) -> {LocationData}); //whyyyyyyyyy
             float bearing = locUser.bearingTo(locFriend);
             arrowImageView.setRotation(bearing);
         }).start();
