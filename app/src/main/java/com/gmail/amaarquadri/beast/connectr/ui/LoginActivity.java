@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() && password.isEmpty()) {
             Toast.makeText(this, "Username and Password cannot be empty.",
                     Toast.LENGTH_SHORT).show();
             return;
