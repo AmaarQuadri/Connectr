@@ -37,9 +37,6 @@ public class MainActivity extends Activity {
         else friendsButton.setText("SomeFriends");
     }
 
-    public void logout(View view) {
-    }
-
     public void addFriend(View view) {
         Intent intent = new Intent(this, AddFriendActivity.class);
         intent.putExtra("user", user);
@@ -56,5 +53,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, FindFriendActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+    }
+
+    public void logout(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
