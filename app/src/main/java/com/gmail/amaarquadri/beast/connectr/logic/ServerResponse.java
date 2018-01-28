@@ -50,5 +50,7 @@ public class ServerResponse implements Serializable {
         return newFriend;
     }
 
-    public LocationData getLocationData() { return locationData;}
+    public LocationData getLocationData() {
+        return locationData;
+    }
 }
