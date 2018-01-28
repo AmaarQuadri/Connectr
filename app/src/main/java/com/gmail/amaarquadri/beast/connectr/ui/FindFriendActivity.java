@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.Friend;
 import com.gmail.amaarquadri.beast.connectr.logic.LocationData;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsync;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 /**
@@ -32,11 +34,15 @@ public class FindFriendActivity extends Activity {
 
         //FindFriendActivity = LocationServices.getFusedLocationProviderClient(this);
 
-        Location locUser = toLocation(user.getLastLocationData());
-        Location locFriend = toLocation(friend.getLastLocationData());
-        float bearing = locUser.bearingTo(locFriend);
-        arrowImageView.setRotation(bearing);
+        new Thread(() -> {
+            Location locUser = toLocation(user.getLastLocationData());
+            Location locFriend = toLocation(friend.getLastLocationData());
+            ServerAsync.sendToServer(ServerRequest.GET_LOCATION, (response) -> {
 
+            });
+            float bearing = locUser.bearingTo(locFriend);
+            arrowImageView.setRotation(bearing);
+        }).start();
     }
 
     private Location toLocation(LocationData locationData) {
