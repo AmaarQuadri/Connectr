@@ -14,6 +14,10 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
 /**
  * Created by amaar on 2018-01-27.
  * Main Activity to link to other Activities.
+ * Password REVeast-b99
+ * fav movie 3 Idiots
+ * asmmorin@uwaterloo.ca
+ * connectrbeast.com
  */
 public class MainActivity extends Activity {
     private User user;
