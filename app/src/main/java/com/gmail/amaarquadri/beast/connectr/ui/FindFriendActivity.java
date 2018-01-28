@@ -1,6 +1,7 @@
 package com.gmail.amaarquadri.beast.connectr.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +22,8 @@ public class FindFriendActivity extends Activity {
     private User user;
     private Friend friend;
     private ImageView arrowImageView;
-
+    private Location userLocation;
+    private Location friendLocation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,13 +34,24 @@ public class FindFriendActivity extends Activity {
         user = (User) getIntent().getSerializableExtra("user");
         friend = (Friend) getIntent().getSerializableExtra("friend");
 
-        //FindFriendActivity = LocationServices.getFusedLocationProviderClient(this);
-
+        Context this_ = this;
         new Thread(() -> {
-            Location locUser = toLocation(user.getLastLocationData());
-            Location locFriend = toLocation(friend.getLastLocationData());
-            ServerAsync.sendToServer(ServerRequest.createGetLocationServerRequest(user, friend),
-                    (response) -> {LocationData}); //whyyyyyyyyy
+            PollLocationAsync.pollLocation(this_, location -> {
+                synchronized (this_) {
+                    userLocation = location;
+                }
+            });
+            ServerAsync.sendToServer(ServerRequest.createGetLocationServerRequest(user, friend), (response) -> {
+                synchronized (this_) {
+                    friendLocation = toLocation(response.getLocationData());
+                }
+            });
+
+            while (userLocation == null && friendLocation == null) {}
+            synchronized (this_) {
+
+            }
+
             float bearing = locUser.bearingTo(locFriend);
             arrowImageView.setRotation(bearing);
         }).start();
