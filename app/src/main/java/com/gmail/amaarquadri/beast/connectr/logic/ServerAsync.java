@@ -1,13 +1,10 @@
 package com.gmail.amaarquadri.beast.connectr.logic;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -16,8 +13,8 @@ import java.net.UnknownHostException;
  */
 public class ServerAsync {
     private static boolean connectionInitialized = false;
-    private static PrintWriter out;
-    private static BufferedReader in;
+    private static ObjectOutputStream out;
+    private static ObjectInputStream in;
 
     public interface Callback {
         void onFinish(ServerResponse serverResponse);
@@ -27,10 +24,8 @@ public class ServerAsync {
         new Thread(() -> {
             try {
                 if (!connectionInitialized) initializeConnection();
-                out.println(serializeServerRequest(serverRequest));
-
-                String input = in.readLine();
-                callback.onFinish(deserializeServerResponse(input));
+                out.writeObject(serverRequest);
+                callback.onFinish((ServerResponse) in.readObject());
             }
             catch (IOException | ClassNotFoundException e) {
                 callback.onFinish(null);
@@ -41,8 +36,8 @@ public class ServerAsync {
     private static void initializeConnection() throws IOException {
         try {
             Socket socket = new Socket("172.30.155.93", 4321); //"DESKTOP-8M8UDU4"
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
             connectionInitialized = true;
         }
         catch (UnknownHostException e) {
