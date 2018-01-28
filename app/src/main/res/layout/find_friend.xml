@@ -12,8 +12,7 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:src="@drawable/arrow_up"
-        android:id="@+id/arrowImage"
-        android:rotation=""/>
+        android:id="@+id/arrowImage" />
 
     <android.support.v7.widget.AppCompatCheckedTextView
         android:layout_width="match_parent"
