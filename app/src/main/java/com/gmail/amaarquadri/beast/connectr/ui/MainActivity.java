@@ -17,6 +17,7 @@ import com.gmail.amaarquadri.beast.connectr.logic.User;
  * Password REVeast-b99
  * fav movie 3 Idiots
  * asmmorin@uwaterloo.ca
+ * connectrbeast.com
  */
 public class MainActivity extends Activity {
     private User user;
