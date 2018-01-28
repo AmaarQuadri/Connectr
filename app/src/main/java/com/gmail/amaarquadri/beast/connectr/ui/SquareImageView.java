@@ -12,6 +12,7 @@ public class SquareImageView extends android.support.v7.widget.AppCompatImageVie
         super(context, attrs);
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
