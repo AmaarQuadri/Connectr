@@ -58,12 +58,12 @@ public class FriendsPermissionActivity extends Activity {
             else allFriendsHavePermission = false;
             button.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) ServerAsync.sendToServer(ServerRequest.createEnablePermissionServerRequest(user, friend), (response) -> {
-                    if (response.getType() == ServerResponse.Type.FAILED) {
+                    if (response == null || response.getType() == ServerResponse.Type.FAILED) {
                         //TODO: handle
                     }
                 });
                 else ServerAsync.sendToServer(ServerRequest.createDisablePermissionServerRequest(user, friend), (response) -> {
-                    if (response.getType() == ServerResponse.Type.FAILED) {
+                    if (response == null || response.getType() == ServerResponse.Type.FAILED) {
                         //TODO: handle
                     }
                 });
