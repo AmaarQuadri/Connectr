@@ -23,8 +23,8 @@ public class UpdateLocationService extends IntentService {
     private FusedLocationProviderClient locationClient;
     private User user;
 
-    public UpdateLocationService(String name) {
-        super(name);
+    public UpdateLocationService() {
+        super("updateLocationWorkerThread");
     }
 
     @Override

@@ -32,6 +32,8 @@ public class FriendsPermissionActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.friends_permission);
+
         user = (User) getIntent().getSerializableExtra("user");
         friendsLinearLayout = findViewById(R.id.friends_list);
         allFriendsSwitch = findViewById(R.id.all_friends_switch);

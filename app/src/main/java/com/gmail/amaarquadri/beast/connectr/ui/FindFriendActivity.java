@@ -19,8 +19,7 @@ public class FindFriendActivity extends Activity {
     private Friend friend;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_friend);
 
@@ -29,8 +28,8 @@ public class FindFriendActivity extends Activity {
 
         //FindFriendActivity = LocationServices.getFusedLocationProviderClient(this);
 
-        Location locUser = new Location (user.getLastLocationData());
-        Location locFriend = new Location (friend.getLastLocationData());
+        Location locUser = toLocation(user.getLastLocationData());
+        Location locFriend = toLocation(friend.getLastLocationData());
         float bearing = locUser.bearingTo(locFriend);
     }
 

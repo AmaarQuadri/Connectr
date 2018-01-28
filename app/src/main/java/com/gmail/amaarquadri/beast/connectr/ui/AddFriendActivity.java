@@ -26,6 +26,7 @@ public class AddFriendActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_friend);
         usernameEditText = findViewById(R.id.username);
 
         user = (User) getIntent().getSerializableExtra("user");
