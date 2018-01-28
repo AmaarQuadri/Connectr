@@ -17,48 +17,40 @@ import java.util.Base64;
 /**
  * Created by amaar on 2018-01-27.
  */
-
 public class ServerUtils {
-    private static Socket socket;
+    private static boolean connectionInitialized = false;
     private static PrintWriter out;
     private static BufferedReader in;
 
-
     @NonNull
     public static ServerResponse sendToServer(ServerRequest serverRequest) throws IOException, ClassNotFoundException {
-        String output = serializeServerRequest(serverRequest);
-        initializeConnection();
+        if (!connectionInitialized) initializeConnection();
+        out.println(serializeServerRequest(serverRequest));
 
-        out.println(output);
-        //send data
-
-
-        String input="";
-        //get back data
+        String input;
         try {
             input = in.readLine();
-        }catch (IOException e){
-            //output read fail error.
-            //system.exit(1)
+        } catch (IOException e){
+            throw new IOException("Server didn't respond", e);
         }
 
         return deserializeServerResponse(input);
     }
 
-    private static void initializeConnection(){
-        try{
-            socket = new Socket("LAPTOP-0MBJPDGI", 4321);
+    private static void initializeConnection() throws IOException {
+        try {
+            Socket socket = new Socket("LAPTOP-0MBJPDGI", 4321);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        }catch(UnknownHostException e){
-            //output an unknown host error
-            //system.exit(1);
-        }catch(IOException e){
-            //output an IO error
-            //system.exit(1);
+            connectionInitialized = true;
+        }
+        catch (UnknownHostException e) {
+            throw new IOException("Server not found", e);
+        }
+        catch(IOException e){
+            throw new IOException("No IO connection", e);
         }
     }
-
 
     private static ServerResponse deserializeServerResponse(String serverResponse) throws IOException, ClassNotFoundException {
         ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(Base64.getDecoder().decode(serverResponse)));
