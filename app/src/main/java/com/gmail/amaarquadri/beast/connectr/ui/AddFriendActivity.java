@@ -13,6 +13,8 @@ import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
+import java.io.IOException;
+
 /**
  * Created by amaar on 2018-01-27.
  */
@@ -30,8 +32,14 @@ public class AddFriendActivity extends Activity {
     }
 
     public void addFriend(View view) {
-        ServerResponse response = ServerUtils.sendToServer(ServerRequest.createAddFriendServerRequest(user,
-                usernameEditText.getText().toString()));
+        ServerResponse response = null;
+        try {
+            response = ServerUtils.sendToServer(ServerRequest.createAddFriendServerRequest(user,
+                    usernameEditText.getText().toString()));
+        } catch (IOException | ClassNotFoundException e) {
+            Toast.makeText(this, "Cannot connect to Server.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (response.getType() == ServerResponse.Type.ADD_FRIEND_SUCCESS) {
             user.getFriends().add(response.getNewFriend());
             usernameEditText.getText().clear();
