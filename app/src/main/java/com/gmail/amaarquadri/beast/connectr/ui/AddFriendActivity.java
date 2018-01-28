@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class AddFriendActivity extends Activity {
     public void addFriend(View view) {
         ServerResponse response;
         try {
-            response = ServerUtils.sendToServer(ServerRequest.createAddFriendServerRequest(user,
+            response = ServerAsyncTask.sendToServer(ServerRequest.createAddFriendServerRequest(user,
                     usernameEditText.getText().toString()));
         } catch (IOException | ClassNotFoundException e) {
             Toast.makeText(this, "Cannot connect to Server.", Toast.LENGTH_SHORT).show();

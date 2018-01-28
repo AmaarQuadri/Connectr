@@ -20,10 +20,10 @@
         </activity>
         <activity android:name=".ui.AddFriendActivity" />
         <activity android:name=".ui.FindFriendActivity" />
+        <activity android:name=".ui.FindFriendListActivity" />
         <activity android:name=".ui.FriendsPermissionActivity" />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.SignupActivity" />
-        <activity android:name=".ui.FindFriendListActivity" />
 
         <service android:name=".ui.UpdateLocationService" />
     </application>

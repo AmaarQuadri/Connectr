@@ -1,5 +1,6 @@
 package com.gmail.amaarquadri.beast.connectr.logic;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import java.io.BufferedReader;
@@ -17,24 +18,24 @@ import java.util.Base64;
 /**
  * Created by amaar on 2018-01-27.
  */
-public class ServerUtils {
+public class ServerAsyncTask extends AsyncTask<ServerRequest, Void, ServerResponse> {
     private static boolean connectionInitialized = false;
     private static PrintWriter out;
     private static BufferedReader in;
 
-    @NonNull
-    public static ServerResponse sendToServer(ServerRequest serverRequest) throws IOException, ClassNotFoundException {
-        if (!connectionInitialized) initializeConnection();
-        out.println(serializeServerRequest(serverRequest));
-
-        String input;
+    @Override
+    protected ServerResponse doInBackground(ServerRequest... serverRequests) {
         try {
-            input = in.readLine();
-        } catch (IOException e){
-            throw new IOException("Server didn't respond", e);
-        }
+            if (!connectionInitialized) initializeConnection();
+            out.println(serializeServerRequest(serverRequests[0]));
 
-        return deserializeServerResponse(input);
+            String input = in.readLine();
+
+            return deserializeServerResponse(input);
+        }
+        catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
 
     private static void initializeConnection() throws IOException {
@@ -45,9 +46,11 @@ public class ServerUtils {
             connectionInitialized = true;
         }
         catch (UnknownHostException e) {
+            e.printStackTrace();
             throw new IOException("Server not found", e);
         }
-        catch(IOException e){
+        catch(IOException e) {
+            e.printStackTrace();
             throw new IOException("No IO connection", e);
         }
     }

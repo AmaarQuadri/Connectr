@@ -13,7 +13,7 @@ import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.Friend;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class FriendsPermissionActivity extends Activity {
                 if (isChecked) {
                     ServerResponse response;
                     try {
-                        response = ServerUtils.sendToServer(ServerRequest.createEnablePermissionServerRequest(user, friend));
+                        response = ServerAsyncTask.sendToServer(ServerRequest.createEnablePermissionServerRequest(user, friend));
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                         //TODO: handle
@@ -75,7 +75,7 @@ public class FriendsPermissionActivity extends Activity {
                 else {
                     ServerResponse response;
                     try {
-                        response = ServerUtils.sendToServer(ServerRequest.createDisablePermissionServerRequest(user, friend));
+                        response = ServerAsyncTask.sendToServer(ServerRequest.createDisablePermissionServerRequest(user, friend));
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                         //TODO: handle

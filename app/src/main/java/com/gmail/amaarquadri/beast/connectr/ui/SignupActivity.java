@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ public class SignupActivity extends Activity {
         reenterPasswordEditText = findViewById(R.id.create_password_repeat);
     }
 
-    public void create(View view) {
+    public void createAccount(View view) {
         String username = usernameEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -56,7 +56,8 @@ public class SignupActivity extends Activity {
 
         ServerResponse response;
         try {
-            response = ServerUtils.sendToServer(ServerRequest.createCreateAccountServerRequest(username, password));
+            new ServerAsyncTask().execute(ServerRequest.createCreateAccountServerRequest(username, password));
+            response = ServerAsyncTask.sendToServer();
         } catch (IOException | ClassNotFoundException e) {
             Toast.makeText(this, "Cannot connect to server.", Toast.LENGTH_SHORT).show();
             return;

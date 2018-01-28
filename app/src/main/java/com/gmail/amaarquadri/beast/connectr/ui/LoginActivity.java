@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.gmail.amaarquadri.beast.connectr.R;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class LoginActivity extends Activity {
 
         ServerResponse response;
         try {
-            response = ServerUtils.sendToServer(ServerRequest.createLoginServerRequest(username, password));
+            response = ServerAsyncTask.sendToServer(ServerRequest.createLoginServerRequest(username, password));
         } catch (IOException | ClassNotFoundException e) {
             Toast.makeText(this, "Unable to connect to server.", Toast.LENGTH_SHORT).show();
             return;
@@ -67,5 +67,9 @@ public class LoginActivity extends Activity {
         Intent intent = new Intent(this, FriendsPermissionActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+    }
+
+    public void createAccount(View view) {
+        startActivity(new Intent(this, SignupActivity.class));
     }
 }

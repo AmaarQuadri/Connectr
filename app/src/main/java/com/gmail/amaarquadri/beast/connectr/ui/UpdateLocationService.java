@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import com.gmail.amaarquadri.beast.connectr.logic.LocationData;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerRequest;
 import com.gmail.amaarquadri.beast.connectr.logic.ServerResponse;
-import com.gmail.amaarquadri.beast.connectr.logic.ServerUtils;
+import com.gmail.amaarquadri.beast.connectr.logic.ServerAsyncTask;
 import com.gmail.amaarquadri.beast.connectr.logic.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -46,7 +46,7 @@ public class UpdateLocationService extends IntentService {
                     LocationData locationData = new LocationData(location.getLatitude(), location.getLongitude(), location.getTime());
                     ServerResponse response;
                     try {
-                        response = ServerUtils.sendToServer(ServerRequest.createUpdateLocationServerRequest(user, locationData));
+                        response = ServerAsyncTask.sendToServer(ServerRequest.createUpdateLocationServerRequest(user, locationData));
                     } catch (IOException | ClassNotFoundException e) {
                         //TODO: handle
                         return;
