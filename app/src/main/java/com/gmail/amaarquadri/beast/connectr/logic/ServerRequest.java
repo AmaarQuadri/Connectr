@@ -39,4 +39,20 @@ public class ServerRequest implements Serializable {
     public static ServerRequest createAddFriendServerRequest(String username, String newFriendUsername) {
         return new ServerRequest(Type.ADD_FRIEND, username, newFriendUsername);
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNewFriendUsername() {
+        return newFriendUsername;
+    }
 }
