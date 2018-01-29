@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
             }
 
             User user = response.getUser();
-            Intent intent = new Intent(this, FriendsPermissionActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("user", user);
             startActivity(intent);
         });
